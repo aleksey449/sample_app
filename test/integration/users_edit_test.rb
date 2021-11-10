@@ -20,8 +20,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful edit" do
-    # log_in_as(@user)
-    @controller.session[:user_id] = user.id
+    log_in_as(@user)
+    #@controller.session[:user_id] = user.id
     get edit_user_path(@user)
     assert_template 'users/edit'
     name  = "Foo Bar"
@@ -40,7 +40,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   test "successful edit with friendly forwarding" do
     get edit_user_path(@user)
     log_in_as(@user)
-    assert_redirected_to user_path(@user)
+    assert_redirected_to edit_user_path(@user)
     name  = "Foo Bar"
     email = "foo@bar.com"
     patch user_path(@user), params: { user: { name:  name,
